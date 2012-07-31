@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Gabillionaires</title>
+      
+    <%= stylesheet_link_tag "profile" %>
+
+ <link type="text/css" href="/css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+  
+    <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js"></script>
+  
+
+  </head>
+  <body>
+
+<div id="whole_page">
+  		<div id="header">Gabillionaires</div>
+      
+      <div id="nav">   
+         <% if user_signed_in? %>
+            <%= link_to_unless_current("Home", new_post_path )%> |
+            <%= link_to_unless_current("My Hub", hub_path) %> |
+            <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+             
+           <% else %>
+           <%= link_to_unless_current("About Us", { :action => "about" }) %> |
+            <%= link_to_unless_current "Sign up", new_user_registration_path %> |
+            <%= link_to_unless_current "Sign in", new_user_session_path %>
+               
+        <% end %>
+       <%= @content_for_layout %>
+      </div>
+
+
+
+
+                           
+      <div id="content">
+              
+             <div id="left_column1" >
+                    <div id="left_navigation">
+                                      <ul>
+                                            <li>    <%= link_to hub_path do %>  <%= image_tag current_user.photo.url,:size=>"25x25" %> 
+                                                
+                                                <%= current_user.firstname + " " + current_user.lastname %> <% end %>  
+                                            </li>
+                                          
+
+                                            <li> <%= link_to new_post_path do %> <%= image_tag("/images/preview11.png", :size => "25x25") %> Home <% end %></li>
+                                             
+                                          
+                                          <li>
+                                             <%= link_to myfriends_friends_path do %>  <%= image_tag("/images/following.png", :size => "25x25") %> Following <% end %>
+                                          </li>
+                                          
+
+                                          <li>
+                                             <%= link_to following_friends_path do %>  <%= image_tag("/images/followers.png", :size => "25x25") %> Followers <% end %>
+                                          </li>
+        
+                                          <li> <%= link_to friends_friend_path do %><%= image_tag("/images/users-icon.png", :size => "25x25") %> Community <% end %></li>
+                                           
+                                           
+                            
+                                      
+                                         <li>
+                                            <%= link_to events_path do %> <%= image_tag("/images/Calender-icon.png", :size => "25x25") %> Events <% end %>
+                                          </li>
+                                         
+
+                                          
+                                             <li> <%= link_to edit_user_registration_path do %> <%= image_tag("/images/advanced-icon.png", :size => "25x25") %> Settings <% end %>  </li>
+                                           
+
+                                      </ul>
+                    </div>  <!-- end of left_navitaion-->
+             </div><!--end of left column-->  
+
+            
+              <div id="friends_container">
+
+                      
+           <fieldset id = "fieldset">
+                <legend id="legend">Followers</legend>
+                 <table id="friends"  class="display" border="0" >
+              <thead>
+                      <tr>
+                        <th>
+                           Name 
+                        </th>
+                        
+                        <th>
+                           Location 
+                        </th>
+
+                       
+                       </tr>
+              </thead>
+              <tbody> 
+                    
+                    <% @followers.each do |u| %>
+                                   
+                      <tr >
+                            
+                    
+                            <td> <div id="username"><%= link_to user_path(u) do %><%= image_tag u.photo.url,:size=>"25x25" %>  <%= u.firstname + " " + u.lastname %> <%end%>    </div></td>
+                      
+                           
+                            <td> <div id="location_user"><%= u.city %>, <%= u.country %></div></td>
+
+                      </tr>   
+
+                  <% end %>
+
+              </tbody> 
+              </table>   
+        
+
+           </fieldset>       
+
+
+       </div> <!-- end of friends_container -->
+ 		     
+
+                
+       </div> <!-- end of content-- >
+
+</div><!-- end of whole page -->
+</body>
+</html>

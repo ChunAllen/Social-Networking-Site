@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Gabillionaires</title>
+      
+     <%= stylesheet_link_tag "profile" %>
+
+   
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/expander.js"></script>
+
+
+<style type="text/css">
+      @import "/css/flora.datepick.css";
+    </style>
+
+  
+    <script type="text/javascript" src="/js/jquery.datepick.js"></script>
+    <script type="text/javascript">
+    $(function() {
+       $('#popupDatepicker').datepick();
+       
+    });
+    </script>
+
+
+  </head>
+  <body>
+
+<div id="whole_page">
+  		<div id="header"> Gabillionaires </div>
+      
+      <div id="nav">   
+         <% if user_signed_in? %>
+            <%= link_to_unless_current("Home", new_post_path )%> |
+            <%= link_to_unless_current("My Hub", { :action => "index" }) %> |
+            <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+             
+           <% else %>
+           <%= link_to_unless_current("About Us", { :action => "about" }) %> |
+            <%= link_to_unless_current "Sign up", new_user_registration_path %> |
+            <%= link_to_unless_current "Sign in", new_user_session_path %>
+               
+        <% end %>
+       <%= @content_for_layout %>
+      </div>
+
+
+
+   <% if user_signed_in? %> 
+                           
+      <div id="content">
+         <div id="left_column1" >
+                    <div id="left_navigation">
+                                      <ul>
+                                            <li>    <%= link_to hub_path do %>  <%= image_tag current_user.photo.url,:size=>"25x25" %> 
+                                                
+                                                <%= current_user.firstname + " " + current_user.lastname %> <% end %>  
+                                            </li>
+                                          
+
+                                            <li> <%= link_to new_post_path do %> <%= image_tag("/images/preview11.png", :size => "25x25") %> Home <% end %></li>
+                                             
+                                          
+                                          <li>
+                                             <%= link_to myfriends_friends_path do %>  <%= image_tag("/images/following.png", :size => "25x25") %> Following <% end %>
+                                          </li>
+                                          
+
+                                          <li>
+                                             <%= link_to following_friends_path do %>  <%= image_tag("/images/followers.png", :size => "25x25") %> Followers <% end %>
+                                          </li>
+        
+                                          <li> <%= link_to friends_friend_path do %><%= image_tag("/images/users-icon.png", :size => "25x25") %> Community <% end %></li>
+                                           
+                                           
+                            
+                                        
+                                 
+                                          <li>
+                                            <%= link_to events_path do %> <%= image_tag("/images/Calender-icon.png", :size => "25x25") %> Events <% end %>
+                                          </li>
+                                          
+                                         
+
+                                          
+                                             <li> <%= link_to edit_user_registration_path do %> <%= image_tag("/images/advanced-icon.png", :size => "25x25") %> Settings <% end %>  </li>
+                                           
+
+                                      </ul>
+                    </div>  <!-- end of left_navitaion-->
+             </div><!--end of left column-->  
+
+                 
+
+
+                           <div id="right_column" >
+                                <div id="right_content">
+
+                                		   <fieldset>
+                      						
+                      				<legend>Events</legend>	
+
+                      		<div class="new_event"><!-- start msg-list replies -->
+														 <p class="msg_head"> <u> Create Event </u> </p>
+														 <div class="msg_body">
+														 	 <br/>
+                           
+                               <br/>
+                            
+                              <div align="center">
+														 	<%= form_for @event do |event|  %>
+														 		<%= event.hidden_field :user_id, :value => current_user.id %>
+														 	  
+                                <table>
+                                  <tr>
+														 		 		<td align="right">Event Name:</td>
+														 		    <td align="center"><%= event.text_field :event_name, :placeholder => "ex. Birthday party" %></td>
+														 		 	</tr>
+                                 
+														 		   <tr>
+                                    <td align="right">Details:</td>
+														 		 		  <td align="center"><%= event.text_field :details, :placeholder => "Add more info" %></td>
+                                  </tr>
+
+                                  <tr>
+														 		   <td align="right">Where:</td>
+														 		 	 <td align="center"><%= event.text_field :where ,:placeholder => "Add a place?" %></td>
+														 		  </tr>
+                                    
+                                  <tr>
+                                      <td align="right">When:</td>
+														 		     	<td align="center"><%= event.text_field :when , :id => "popupDatepicker" %></td>
+                                  </tr>
+                                    
+                                  <tr>
+                                    <td align="right">Time:</td>
+														 		 		<td align="center"><%= event.text_field :time ,:placeholder => "Add a time?"%></td>
+														 		  </tr>
+
+                                  <tr>
+                                    <td></td>
+                                      <td align="right"><%= event.submit "Create" %> </td>
+                                  </tr>
+                              
+                                </table>   
+														 	
+														 	<% end %>
+														 </div>
+
+													 </div>
+
+													 <br/>
+													
+
+
+													 <div class="new_event"><!-- start msg-list replies -->
+														 <p class="msg_head"> <u> Show Calendar </u> </p>
+														 <div class="msg_body">
+
+														 	<div id="calendar">
+
+                                   <h2 id="month">
+                                      <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
+                                      <%= h @date.strftime("%B %Y") %>
+                                      <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %>
+                                  </h2>
+
+																<%= calendar_for @events, :year => @date.year, :month => @date.month do |calendar| %>
+																<%= calendar.head('Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat') %>
+																		
+                                    	<% calendar.day(:day_method => :when) do |date,events|%>  
+																				
+																					<%= date.day %>
+																					  <ul>
+                                              <% for event in events %>
+                                               
+                                               <li>
+                                                 <%= link_to showevent_event_path(event.id) do %> 
+                                                 <%= event.event_name %>
+                                                 <% end %>
+                                               </li>
+
+                                              <% end %>
+                                            </ul>
+																				
+																			<% end %>
+																	
+																	<% end %>		
+
+															</div><!-- div calendar -->
+
+														 </div><!-- end msg_body-->
+													</div><!--end new_event-->
+
+                              			   </fieldset>		
+                                </div>   
+                          </div><!--end of right column-->
+                  
+
+      </div><!-- end of content -->
+  <% else %>
+      redirect_to new_user_session_path
+  <%end %>
+                
+</div> 
+</body>
+</html>

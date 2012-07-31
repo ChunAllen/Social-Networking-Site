@@ -1,0 +1,94 @@
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="/css/form.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/css/login.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/css/button.css" media="screen" />
+
+	<link rel="stylesheet" type="text/css" href="/css/mws.theme.css" media="screen" />
+	<script type="text/javascript" src="/js/login/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-ui-effecs.min.js"></script>
+
+	<script type="text/javascript" src="/js/jquery.validate-min.js"></script>
+
+	<!-- Login Script -->
+	<script type="text/javascript" src="/js/login.js"></script>
+	     <%= stylesheet_link_tag "site" %>
+
+	 <style type="text/css">
+      @import "/css/flora.datepick.css";
+    </style>
+
+  
+    <script type="text/javascript" src="/js/jquery.datepick.js"></script>
+    <script type="text/javascript">
+    $(function() {
+       $('#popupDatepicker').datepick();
+       
+    });
+    </script>    
+
+</head>
+<body>
+
+<div id="whole_page"><!-- start whole page -->
+
+      <div id="header">
+            Gabillionaires
+        </div>
+        <div id="nav">
+          
+                <%= link_to_unless_current "About Us", about_path %> |
+                <%= link_to_unless_current "Sign up", new_user_registration_path %> |  
+                <%= link_to_unless_current "Sign in", new_user_session_path %>
+        </div> 
+
+      <div id="content"><!-- start content -->
+		    
+		    <div id="login-content">
+		        <div id="mws-login">
+		            <h1>Sign In</h1>
+		            <div class="mws-login-lock"><img src="/images/locked-2.png" alt="" /></div>
+		            <div id="mws-login-form">
+		                <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+		                    <div class="mws-form-row">
+		                        <div class="mws-form-item large">
+		                    
+		                               <%= f.email_field :email, :placeholder => "Email", :class=> "mws-login-username mws-textinput required" %>
+		                        </div>
+		                    </div>
+		                    <div class="mws-form-row">
+		                        <div class="mws-form-item large">
+		                    
+		                              <%= f.password_field :password, :class=>"mws-login-password mws-textinput required", :placeholder => "Password"%>
+		                        </div>
+		                    </div>
+
+		                    <div class="mws-form-row mws-inset">
+		                        <ul class="mws-form-list inline">
+		                         
+		                             <% if devise_mapping.rememberable? %>
+		    						  <%= f.check_box :remember_me %> Remember Me
+		  							<% end %>
+
+		                        </ul>
+		                    </div>
+		                    <div class="mws-form-row" >
+		                    	  <div ="mws_remember_me">
+		                        		<%= f.submit "Log In" ,:class => "mws-button green mws-login-button" %>
+		                   		 </div>
+		                    </div>
+
+		              	<% end %>
+		            </div>
+		        </div>
+		    </div>
+
+		</div><!-- end of content -->
+
+</div>
+
+
+</body>
+</html>

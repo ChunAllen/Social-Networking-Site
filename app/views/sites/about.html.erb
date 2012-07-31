@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>About Gabillionaires</title>
+     <%= stylesheet_link_tag "site" %>
+
+      <link rel="stylesheet" href="/themes/default/default.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="/nivo-slider.css" type="text/css" media="screen" />
+       <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+      
+       <link rel="stylesheet" href="/css/about.css" type="text/css" media="screen" />
+  </head>
+  <body>
+  	
+<div id="whole_page">
+  		<div id="header"> Gabillionaires</div>
+    
+      <div id ="nav">
+            <%= link_to_unless_current("About Us", { :action => "about" }) %> |
+            <%= link_to_unless_current "Sign up", new_user_registration_path %> |
+            <%= link_to_unless_current "Sign in", new_user_session_path %>
+	  </div>
+
+       <div id="content">
+
+             <div id="wrapper">
+          
+
+                      <div class="slider-wrapper theme-default">
+                          <div id="slider" class="nivoSlider">
+                            
+                              <img src="images/TRNQYUZSJU.jpeg" data-thumb="images/toystory.jpg" alt="" title="Welcome to Gabillionaires" />
+
+                              <img src="images/first_choice_618x246.jpeg" data-thumb="images/up.jpg" alt="" title="Where friendships begins here" />
+                           
+                              <img src="images/atlanta_georgia-otherweb.jpeg" data-thumb="images/walle.jpg" alt="" data-transition="slideInLeft" title="No.1 Social Networking of AppSource"  />
+
+                              <img src="images/land618x246.jpeg" data-thumb="images/nemo.jpg" alt="" title="Social Networking for all" />
+
+                          </div>
+                         
+                      </div>
+
+                  </div>
+
+                  <script type="text/javascript" src="/scripts/jquery-1.7.1.min.js"></script>
+                  <script type="text/javascript" src="/jquery.nivo.slider.js"></script>
+                  <script type="text/javascript">
+                  $(window).load(function() {
+                      $('#slider').nivoSlider();
+                  });
+                  </script>	    
+
+
+        
+                      
+                 <div id="bottomcontent">
+
+                       
+
+                          
+                          <div class="left">
+
+                            <h2>Welcome to Gabillionaires</h2>
+                            <img src="images/01.jpg" alt="" class="pic" width="200" height="60" />
+                              <p>Gabillionaires is a real-time information network that connects you to the latest stories, ideas, opinions and news about what you find interesting. Simply find the accounts you find most compelling and follow the conversations.
+
+                          </p>
+                              
+                          </div>  
+
+                          <div class="middle">
+
+                              <h2>Why join Gabillionaires?</h2>
+                              <img src="images/02.jpg" alt="" class="pic" width="200" height="60" />
+                              <p>Gabillionaires can be thought of as your home on the Internet. It's a place people can go to leave you a message, browse through your photo collections, or even chat with you while you are online. It can be a great way to keep in contact with friends and family, and even find long lost friends that you haven't spoken to in years.
+                             </p>
+
+                          </div>    
+
+
+                      
+                           <div class="right">
+
+                              <h2>Gabillionaires Community</h2>
+                              <p class="thumbs">
+                              <a href="#"><img src="/images/9gag/derp.png" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="/images/9gag/images.jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="/images/9gag/images (1).jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/images (2).jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/images (3).jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/675718_700b.jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/Untitled-1.jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/______________-you-don_t-say-9gag-____-___________-52761.png" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/download (1).jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/download.jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/ohgod.jpeg" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              <a href="#"><img src="images/9gag/straightface2.png" width="40" height="40" alt="Lorem ipsum dolor sit amet" /></a>
+                              </p>
+                            
+                          </div>
+
+                </div>
+                          
+
+             
+
+  
+                
+
+  		    </div>
+  </div>
+  </body>
+</html>

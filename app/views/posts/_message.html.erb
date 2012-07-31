@@ -1,0 +1,31 @@
+  
+<div id="content_posts">
+  <% @postlist.each do |p| %>
+<table>
+ 
+	<tr>
+		<td>
+  	    <li style="list-style:none;"  class="first">
+            		<div class="post_message_container">
+            			<div class="username">
+            			<%= current_user.firstname %>
+            			<%= current_user.lastname %>
+            		    </div>
+
+            			 <div class="time_ago">
+          					<%= distance_of_time_in_words_to_now(p.created_at) %> ago
+       				 	</div>
+            			<hr noshade />   	
+            			<div class="message_container">
+            			<%= p.message %>
+            	  		</div>	
+       			 </div>
+        </li>
+    </td>
+     <tr>
+
+</table>
+
+  
+  <% end %> 
+</div>

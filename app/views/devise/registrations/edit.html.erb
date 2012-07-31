@@ -1,0 +1,212 @@
+<html>
+  <head>
+    <title>Gabillionaires</title>
+     <%= stylesheet_link_tag "profile" %>
+    <link rel="stylesheet" href="/css/datepicker.css" type="text/css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/datepicker.js"></script>
+    <script type="text/javascript" src="/js/eye.js"></script>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/layout.js?ver=1.0.2">
+    </script>
+
+    <style type="text/css">
+      @import "/css/flora.datepick.css";
+    </style>
+
+  
+    <script type="text/javascript" src="/js/jquery.datepick.js"></script>
+    <script type="text/javascript">
+    $(function() {
+       $('#popupDatepicker').datepick();
+       
+    });
+    </script>
+
+
+  </head>
+  <body>
+<div id="whole_page">
+      <div id="header">Gabillionaires</div>
+       <div id="nav">   
+          <% if user_signed_in? %>
+            <%= link_to_unless_current("Home", new_post_path )%> |
+            <%= link_to_unless_current "My Hub", hub_path %> |
+            <%= link_to_unless_current "Log out", destroy_user_session_path, :method => :delete %>       
+         <% end %>
+       </div>
+          
+
+ 
+      <div id="content">
+              
+            <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
+
+             
+            <fieldset>
+
+                <legend>Account Settings</legend>
+
+              <div class="fieldWithErrors"> 
+              <%= devise_error_messages! %>
+              </div>
+             
+            <br/>
+             
+            <table border="0">
+              <tr>
+                
+                 
+                    <td>
+                     <%= f.label :email %>
+                    </td>
+                    <td>
+                        <%= f.email_field :email %>
+                    </td>
+                 
+              
+                   
+                      <td>
+                     <%= f.label :firstname %>
+                      </td>
+                      <td>
+                      <%= f.text_field :firstname %>
+                      </td>
+                    
+              </tr>
+
+              <tr>
+                  
+                      <td>
+                        <%= f.label :current_password %>
+                      </td>
+                      <td>
+                        <%= f.password_field :current_password %>
+                      </td>
+                 
+
+                 
+                        <td>
+                          <%= f.label :lastname %>
+                        </td>
+                        <td>
+                          <%= f.text_field :lastname %>
+                        </td>
+                 
+
+              </tr>
+
+
+
+                <tr>
+                  
+                      <td>
+                         <%= f.label :change_password %>
+                      </td>
+                      <td>
+                        <%= f.password_field :password %>
+                      </td>
+                
+                 <td>
+                          <%= f.label :occupation %>
+                        </td>
+                        <td>
+                          <%= f.text_field :occupation %>
+                        </td>
+                 
+
+              </tr>
+
+
+               <tr>
+                 
+                      <td>
+                         <%= f.label :repeat_password %>
+                      </td>
+                      <td>
+                        <%= f.password_field :password_confirmation %>
+                      </td>
+                 
+                            <td>
+                          <%= f.label :Country %>
+                        </td>
+                        <td>
+                          <%= f.text_field :country %>
+                        </td>
+                 
+
+              </tr>
+
+                 <tr>
+                  
+                      <td>
+                            <%= f.label :Profile_Photo %>
+                      </td>
+
+                      <td>    <%= f.file_field :photo %></td>
+                       <td>
+                          <%= f.label :City %>
+                        </td>
+                        <td>
+                          <%= f.text_field :city %>
+                        </td>
+
+                  
+                    
+
+
+
+              <tr>
+                
+                      <td>
+                         
+                      </td>
+                      <td>
+                       
+                      </td>
+                
+                        <td>
+                          <%= f.label :Relationship_status %>
+                        </td>
+                        <td>
+                           <%= f.select(:status, [["Single","Single"],["In a relationship","In a relationship"]])%>
+                        </td>
+                 
+
+              </tr>
+
+              <tr>
+                  
+                      <td>
+                         
+                      </td>
+                      <td>
+                       
+                      </td>
+                 
+                        <td>
+                          <%= f.label :Birth_Date %>
+                        </td>
+                        <td>
+                           <%= f.text_field :birthdate,  :id => "popupDatepicker"%>
+                        </td>
+
+                </tr>
+
+
+
+
+            </table>
+
+              <div class="form_row" align="right"><%= f.submit "Update" %></div>
+             
+
+            <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure? :( " }, :method => :delete %>.</p>
+
+             </fieldset>  
+            <% end %>
+            </div>
+           
+      </div>
+</div>
+</body>

@@ -1,0 +1,69 @@
+#content_friends {
+  height: 100%;
+  background:  white;
+  padding: 1em;
+  float:left;
+ 
+}
+
+#friends_container {
+  height: 100%;
+  background:  white;
+  padding: 1em;
+  float:left;
+  width: 74%;
+    border-left: 1px solid gray;
+  padding-left: 20px;
+  min-height: 500px;
+ 
+}
+
+#content_profile {
+  height: 100%;
+  background:  white;
+  padding: 1em;
+  
+}
+
+#fieldset{
+  border:0px;
+  height: 100%;
+  background-color: #CBCBCB;
+}
+
+
+#username a, #username a:visited{
+text-decoration: none;
+color: #000000;
+}
+
+#location_user{
+padding-top: 8px
+}
+/* Community Styles */
+.
+.
+.
+table.users {
+  background: #fff;
+  margin-left: 2em;
+}
+table.users td.bottom {
+  border-top: 1px solid #999;
+  padding-top: 10px;
+}
+table.users th {
+  color: white;
+  background: #475899;;
+  font-weight: normal;
+}
+table.users th a {
+  color: white;
+  text-decoration: underline;
+}
+table.users tr.even {
+  background: #ddd;
+}
+table.users tr.odd {
+  background: #eee;
+}

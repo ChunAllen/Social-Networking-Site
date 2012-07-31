@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Gabillionaires</title>
+
+    <%= stylesheet_link_tag "profile" %>
+  <link type="text/css" href="/css/redmond/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/js/expander.js"></script>
+  <script type="text/javascript" src="/js/jquery-ui-1.8.21.custom.min.js"></script>
+  <script type="text/javascript" src="/js/jquerytab.js" ></script>
+
+  </head>
+  <body>
+
+<div id="whole_page">
+      <div id="header">Gabillionaires</div>
+  
+      <div id="nav">   
+          <% if user_signed_in? %>
+            <%= link_to_unless_current("Home", new_post_path )%> |
+            <%= link_to_unless_current "My Hub", hub_path %> |
+            <%= link_to_unless_current "Log out", destroy_user_session_path, :method => :delete %>
+             
+       <% end %>
+     
+</div>
+
+
+        <div id="content">
+
+       <div id="left_column1" >
+                    <div id="left_navigation">
+                                      <ul>
+                                            <li>    <%= link_to hub_path do %>  <%= image_tag current_user.photo.url,:size=>"25x25" %> 
+                                                
+                                                <%= current_user.firstname + " " + current_user.lastname %> <% end %>  
+                                            </li>
+                                          
+
+                                            <li> <%= link_to new_post_path do %> <%= image_tag("/images/preview11.png", :size => "25x25") %> Home <% end %></li>
+                                             
+                                          
+                                          <li>
+                                             <%= link_to myfriends_friends_path do %>  <%= image_tag("/images/following.png", :size => "25x25") %> Following <% end %>
+                                          </li>
+                                          
+
+                                          <li>
+                                             <%= link_to following_friends_path do %>  <%= image_tag("/images/followers.png", :size => "25x25") %> Followers <% end %>
+                                          </li>
+        
+                                          <li> <%= link_to friends_friend_path do %><%= image_tag("/images/users-icon.png", :size => "25x25") %> Community <% end %></li>
+                                           
+                                           
+                            
+                                       
+                                  
+                                           <li>
+                                            <%= link_to events_path do %> <%= image_tag("/images/Calender-icon.png", :size => "25x25") %> Events <% end %>
+                                          </li>
+                                          
+                                         
+
+                                          
+                                             <li> <%= link_to edit_user_registration_path do %> <%= image_tag("/images/advanced-icon.png", :size => "25x25") %> Settings <% end %>  </li>
+                                           
+
+                                      </ul>
+                    </div>  <!-- end of left_navitaion-->
+             </div><!--end of left column-->  
+
+  
+
+              
+               <div id="right_column" >
+                                <div id="right_content">
+
+                                <div id="user">  
+                                         <table border="0">
+                                            <tr>
+                                                <td rowspan="4" >
+                                                    <div class="profile_pic">   
+                                                      <%= image_tag @user.photo.url,:size=>"100x100" %> 
+                                                   <div>
+                                                </td>
+                                                
+                                                <td> 
+                                                   <tr> 
+                                                       <td>
+                                                           <div id="full_name"><%= @user.firstname + " " + @user.lastname %></div>
+                                                        </td>
+                                                   </tr>
+                                                   <tr> 
+                                                       <td>
+                                                        <div id ="location">
+                                                          <%= @user.city + ", " + @user.country %>  <br/>  
+                                                          <%= @user.occupation %>    
+                                                        </div>
+                                                      </td>
+                                                   </tr>
+                                                   <tr> 
+                                                       <td>
+
+                                                          <div id="location">
+                                          
+                                                                <% if @friends > 0 %>
+                                                                                                
+                                                                    <% if @unfriend > 0 %>    
+                                                                     
+                                                                          <%= form_for @getid do |x|  %>
+                                                                             
+                                                                              <%=button_to "Unfollow", {:controller => :users,
+                                                                              :action => 'destroy', :id => @getid.id  }, :method => :delete %>
+                                                                          <% end %>
+
+
+                                                                    <% else %>
+
+                                                                          <%= form_for @getid do |x|  %>
+                                                                         
+
+                                                                              <%=button_to "Cancel Follow Request", {:controller => :users,
+                                                                              :action => 'destroy', :id => @getid.id  }, :method => :delete %>
+                                                                          <% end %>
+
+                                                                     <% end %> 
+
+                                                                <% else %>
+
+                                                                  <% if @unfriend2 >0 %>
+
+                                                                     <%= form_for @friend do |f|  %>
+                                                                                <%= f.hidden_field :user_id, :value => current_user.id %>
+
+                                                                                <%= f.hidden_field :friend_id, :value => @user.id %>
+                                                                                <%= f.hidden_field :status, :value => 0 %>
+                                                                                <%=button_to "Follow Back", {:controller => :users,
+                                                                              :action => 'create'} %>
+                                                                       <% end %>
+
+                                                                         
+                                                                   
+                                                                   <% else %>
+                                                                      <%= form_for @friend do |f|  %>
+                                                                                <%= f.hidden_field :user_id, :value => current_user.id %>
+
+                                                                                <%= f.hidden_field :friend_id, :value => @user.id %>
+                                                                                <%= f.hidden_field :status, :value => 0 %>
+                                                                                <%=button_to "Follow", {:controller => :users,
+                                                                              :action => 'create'} %>
+                                                                       <% end %>
+
+
+                                                                  <% end %>
+                                                            
+                                                            <% end %>   
+ 
+                                                          
+
+
+                                                          </div>
+                                                      </td>
+                                                   </tr> 
+                                                </td>
+
+                                            </tr>
+
+                                         </table>   
+                                </div>
+                               <hr noshade />
+                           
+
+                               
+
+                                    <% if @unfriend > 0 %>  
+                                             
+                                    <div id="tabs"><!-- start of tabs -->
+                                      <ul>
+                                        <li><a href="#tabs-1"><%= @user.firstname %>'s Wall</a></li>
+                                        
+                                        <li><a href="#tabs-2"><%= @user.firstname %>'s Profile</li>
+
+                                      </ul>
+
+                                      <div id="tabs-1">
+
+                                        <div class="post_message_show">
+                                              <ol>
+                                                <% @myposts.each do |myposts| %>
+                                                        <% @getallusers.each do |getallusers| %>
+                                                          <% if myposts.user_id == getallusers.id  %>
+
+                                                             <li class="stbody">
+                                                                      
+                                                                      <div class="stimg">
+                                                                          <%= image_tag getallusers.photo.url,:size=>"50x50" %> 
+                                                                      </div> 
+                                                                      <div class="post_name_home">
+                                                                        <%= getallusers.firstname + " " + getallusers.lastname %>
+                                                                      </div>
+                                                                      <div class="sttext">
+                                                                        
+                                                                           <%= myposts.message %>
+                                                                          <div class="sttime"> <%= distance_of_time_in_words_to_now(myposts.created_at) %>  ago</div> 
+                                                                      </div> 
+                                                             
+                                                                      <div class="msg_list_home"><!-- start msg-list replies -->
+                                                                                                      
+                                                                       <p class="msg_head"> <u> Show/Hide Comments </u> </p>
+
+                                                                            <div class="msg_body">
+
+                                                                              <% @showcomments.each do |showcomments|%>
+                                                                                <% @getallusers.each do |getallusers| %>
+                                                                                  <% if showcomments.post_id == myposts.id %> 
+                                                                                       <% if showcomments.user_id == getallusers.id %> 
+
+                                                                                          <div id="comment_container">
+                                                                                                  <div id="comment_image">
+                                                                                                      <%= image_tag getallusers.photo.url,:size=> "50x50" %>
+                                                                                                    </div>
+
+                                                                                                    <div class="post_name_home">
+                                                                                                       <%= getallusers.firstname + " " + getallusers.lastname %>  
+                                                                                                        <font color="#5e5e5e" size="1px"> posted <%= distance_of_time_in_words_to_now(showcomments.created_at) %> ago
+                                                                                                         </font> 
+                                                                                                    </div>  
+
+                                                                                                       <div class="comment_message">
+                                                                                                              <p> 
+                                                                                                                 <%=  showcomments.message %>
+                                                                                                              </p>
+                                                                                                       </div>
+                                                                                          </div>
+
+                                                                                      <% end %>
+                                                                                    <% end %>
+                                                                                  <% end %>
+                                                                              <% end %>
+
+                                                                                  
+                                                                               <div id="comment_container">
+                                                                                      <div id="comment_image">
+                                                                                      <%= image_tag current_user.photo.url,:size=>"50x50" %>
+                                                                                     </div>    
+
+                                                                                      <div class="post_name_home">
+                                                                                             <%= current_user.firstname + " " + current_user.lastname %>  
+                                                                                                       
+                                                                                      </div>  
+
+                                                                                           <%= form_for @postcomment do |x|  %>
+                                                                                                      <%= x.hidden_field :user_id, :value => current_user.id %>
+                                                                                                      <%= x.hidden_field :post_id, :value => myposts.id %>
+                                                                                                                        
+                                                                                                                         
+                                                                                                                      &nbsp;&nbsp; <%= x.text_area :message, :rows=>1, :cols => 60, :placeholder => "Write a comment...", :min => 250  %>
+                                                                                                                       <br/>
+                                                                                                                        <div align="right">
+                                                                                                                           <%=button_to "Post", {:controller => :comments,
+                                                                                                                            :action => 'create'} %>
+
+                                                                                                                        </div>
+
+                                                                                                                  <% end %>                           
+                                                                                      
+                                                                                    </div> 
+                                                                            </div>  <!-- end msg_body -->
+                                                                      </div>
+                                                              </li> 
+                                                             
+                                                           <% end %> 
+                                                         <% end %> 
+                                                  <% end %>
+
+                                               </ol>
+                                        </div><!-- post_message_show -->
+
+                                      </div><!--end of tab-1 -->
+                                      
+                                      <div id="tabs-2">
+
+                                          <fieldset>
+                                              <legend><%= @user.firstname %>'s Profile</legend>
+
+                                              <table cellspacing="2">
+                                                <tr>
+                                                  <th align="right">Email</th>
+                                                  <td><%= @user.email %></td>
+                                                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                  <th align="right">Full Name</th>
+                                                  <td><%= @user.firstname + "  " + @user.lastname %></td>
+                                                <tr>
+                                                <tr>
+                                                  <th align="right">Location</th>
+                                                  <td><%= @user.city + "  " + @user.country %></td>
+                                                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                  <th align="right">Occupation</th>
+                                                  <td><%= @user.occupation %></td>
+                                                <tr>
+
+                                                <tr>
+                                                  <th align="right">Birth Date</th>
+                                                  <td><%= @user.birthdate%></td>
+                                                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                  <th align="right">Status</th>
+                                                  <td><%= @user.status %></td>
+                                                <tr>
+
+                                              </table>
+
+                                          </fieldset> 
+                                                          
+                                          
+                                      </div><!--end of tab-2 -->
+                                    
+                                    </div><!-- end of tabs -->
+
+                                         
+
+
+
+                                           
+
+
+                                         <% else %>
+                                         <br/><br/>
+                                         <div>
+                                              <table border="0">
+                                                 <tr>
+                                                      <td rowspan="4" >
+                                                         
+                                                             <%= image_tag("/images/images (5).jpeg", :size => "75x75") %>
+                                                                </td>
+                                                          
+                                                          <td> 
+                                                             <tr> 
+                                                                 <td>
+                                                                     <b><%= @user.firstname %>'s account is protected.</b>
+                                                                  </td>
+                                                             </tr>
+                                                             <tr> 
+                                                                 <td>
+                                                                  <div id ="location">
+                                                                    <p>
+
+                                                                      Only confirmed followers have access to <%= @user.firstname %>'s posts and complete profile. 
+
+                                                                    </p>
+                                                                  </div>
+                                                                </td>
+                                                             </tr>
+                                                             <tr> 
+                                                       <td>
+                                                      </td>
+                                                   </tr> 
+                                                </td>
+                                            </tr>
+
+                                         </table>  
+                                          </div> <!--Account is protected-->
+                                         <% end %>                    
+                              
+                              
+                    </div>   
+              </div><!--end of right column-->
+
+        </div><!--end of content-->
+
+
+
+      
+      
+
+   
+  </body>
+</html>
