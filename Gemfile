@@ -7,11 +7,10 @@ gem 'rails', '3.2.6'
 
 gem 'pg'
 gem 'devise'
-
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'formtastic'
 gem "watu_table_builder", :require => "table_builder", :git => "git://github.com/watu/table_builder.git"
-
+#testing github#
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
