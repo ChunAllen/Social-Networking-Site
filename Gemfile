@@ -4,7 +4,7 @@ gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+#My gems
 gem 'pg'
 gem 'devise'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
